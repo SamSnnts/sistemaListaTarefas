@@ -1,11 +1,12 @@
 exports.flash = (req, res, next) =>{
     //define uma propriedade em res.locals como flash e da o valor dela o mesmo que a propriedade flash da req.session ou nulo caso session.flash nao tenha valor
-    console.log(req.session.flash)
+    
     res.locals.flash = req.session.flash || null;
 
     //deleta o valor de session.flash
     delete req.session.flash;
 
+   
     next();
 }
 exports.recuperaInputEmail = (req, res, next) =>{
@@ -16,4 +17,20 @@ exports.recuperaInputEmail = (req, res, next) =>{
     delete req.session.oldInputEmail;
 
     next();
+}
+exports.verificaLogin = (req, res, next) => {
+
+    
+    if(!req.session.user){
+        req.session.flash = {
+            tipo: 'erro',
+            mensagem: ['Precisa estar logado']
+        }
+
+        res.redirect('/login');
+ 
+        return
+    }
+
+    next()
 }

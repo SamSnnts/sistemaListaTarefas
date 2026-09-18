@@ -51,6 +51,8 @@ class Usuario{
 
         //compara a senha mandada no corpo da requisição com a senha do documento do usuario que foi obtido no email, caso nao seja igual, entra na condicional
         if(!bcrypt.compareSync(this.senha, this.user.senha)){
+            //limpa user para caso senha esteja errada nao conseguir logar
+            this.user = null
             //da um push adicionando um valor para o array ERRORS
             this.errors.push('Senha incorreta')
             return

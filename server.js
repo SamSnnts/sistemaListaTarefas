@@ -23,7 +23,7 @@ app.use(express.static(path.resolve(__dirname, 'public')));
 app.set('views', path.resolve(__dirname, 'src', 'views'));
 app.set('view engine', 'ejs');
 
-
+app.use(express.json())
 app.use(express.urlencoded({extended : true}));
 app.use(session({
     secret: 'uma-chave-secreta',
@@ -39,7 +39,11 @@ app.use(recuperaInputEmail)
 const {generateToken, csrfSynchronisedProtection} = 
 csrfSync({
     getTokenFromRequest: (req) => {
-        return req.body._csrf
+        if (req.is('application/x-www-form-urlencoded')) {
+            return req.body._csrf
+        }
+
+        return req.headers['x-csrf-token']
     }
 });
 

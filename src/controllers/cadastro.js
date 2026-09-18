@@ -83,10 +83,17 @@ exports.logar = async (req, res) => {
         //cria uma propriedade em session e define o objeto
         req.session.flash = {
             tipo: 'sucess',
-            mensagem: ['Login bem sucessedido']
+            mensagem: ['Login bem sucedido']
         }
-        //redireciona para a pagina: paginaLoggada
-        res.redirect('/paginaLoggada')
+
+        req.session.user = usuario.user._id
+        
+
+        req.session.save(() => {
+            //redireciona para a pagina: paginaLoggada
+            res.redirect('/lista-de-tarefas')
+        })
+        
 
     //caso nao de certo executa essa
     }catch(e){

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina inicial</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+    <meta name="csrf-token" content="<%= csrfToken %>">
+</head>
+<body>
+    
+    <div class="container">
+        
+        <div id="div-mensagens">
+        <!-- se tiver valor numa propriedade em locals chamada flash e a propriedade dentro de flash chamada mensagem for um array, entra na condicional -->
+    <% if (flash && Array.isArray(flash.mensagem)) { %>
+
+        <!-- itera sobre o array usando foreach e cada valor da iteracao vai esta na variavel mensagem -->
+        <% flash.mensagem.forEach(mensagem => { %>
+
+        <!-- da para "p" o valor de flash.tipo à class dele-->
+                <p class="<%= flash.tipo %>">
+                    <!-- oq vai estar no p que vai ser exibido na tela sera o valor da iteraçao que esta sendo feita no array da propriedades que esta em locals.flash -->
+                    <%= mensagem %>
+                </p>
+
+        <% }) %>
+
+    <% } %>
+
+            </div>
+
+        <table>
+            <th>Tarefas</th>
+            <tr>
+            
+                <td><input type="text" name="tarefa" class="input-tarefa"></td>
+
+                <td><button type="submit" id="adiciona-tarefa">Adicionar tarefa</button></td>
+
+            </tr>
+
+        </table>
+
+        <table>
+            <% if(tarefas) { %>
+
+                <% tarefas.forEach(tarefa => {%>
+                    <tr data-id="<%=tarefa._id%>">
+                        
+                            <td><%=tarefa.tarefa%></td>
+                        
+                        
+                        <td><button class="button-tarefa button-excluir">Excluir</button></td>
+                        <td><button class="button-tarefa button-editar">Editar</button></td>
+                    </tr>
+                <%})%>
+                <%}%>
+                    
+        </table>
+        
+    
+
+    </div>
+
+    <script src="/js/index.js"></script>
+
+</body>
+</html>
