@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina inicial</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    
+    <div class="container">
+
+        <h1>Cadastre-se</h1>
+
+      <div id="div-mensagens">
+        <!-- se tiver valor numa propriedade em locals chamada flash e a propriedade dentro de flash chamada mensagem for um array, entra na condicional -->
+    <% if (flash && Array.isArray(flash.mensagem)) { %>
+
+        <!-- itera sobre o array usando foreach e cada valor da iteracao vai esta na variavel mensagem -->
+        <% flash.mensagem.forEach(mensagem => { %>
+
+        <!-- da para "p" o valor de flash.tipo à class dele-->
+                <p class="<%= flash.tipo %>">
+                    <!-- oq vai estar no p que vai ser exibido na tela sera o valor da iteraçao que esta sendo feita no array da propriedades que esta em locals.flash -->
+                    <%= mensagem %>
+                </p>
+
+        <% }) %>
+
+    <% } %>
+
+</div>
+        <div id="div-form">
+
+            <form action="/cadastro" method="post">
+
+                <div>
+                    <label for="email">Email</label>
+                    <input type="email" name="email"
+                    <% if(oldInputEmail) { %>
+                        value="<%= oldInputEmail || '' %>"
+                        <%}%>
+                    >
+                </div>
+
+                <div>
+                    <label for="senha">Senha</label>
+                    <input type="password" name="senha">
+                </div>
+
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+                <button type="submit">Cadastrar</button>
+
+            </form>
+            
+            <a href="/login">Clique aqui caso já tenha uma conta</a>
+        </div>
+
+    </div>
+
+    <script src="/js/index.js"></script>
+
+</body>
+</html>
