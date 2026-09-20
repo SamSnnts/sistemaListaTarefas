@@ -113,7 +113,8 @@ class Usuario{
             this.errors.push(msg);
             return
         }
-    }    
+    } 
+      
     
 }
 //exporta a class Usuario

@@ -2,6 +2,7 @@
 
 body{
     background-color: rgb(154, 154, 150);
+    margin: 0;
 }
 
 h1{
@@ -93,4 +94,17 @@ a{
 }
 a:hover{
     text-decoration: underline black 1px;
+}
+nav{
+    background-color: rgb(158, 147, 133);
+    height: 50px;
+    border-bottom: 3px solid black;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    
+}
+nav a{
+    font-size: 1.2em;
+    padding: 0px 20px;
 }

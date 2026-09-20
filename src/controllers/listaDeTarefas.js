@@ -1,8 +1,8 @@
 const Tarefa = require('../models/Tarefas')
 
 exports.listaTarefas = async (req, res) => {
-    const tarefa = new Tarefa(req.body);
-
+    const tarefa = new Tarefa(req.body, req.session.user);
+   
     await tarefa.salvarTarefa()
 
     if(tarefa.errors.length > 0 ){
@@ -17,11 +17,7 @@ exports.listaTarefas = async (req, res) => {
         return
     }
 
-    req.session.flash = {
-        tipo: 'sucess',
-        mensagem: ['Tarefa adicionada']
-    }
-    
+
     req.session.save(() => {
         res.json('Recarregar pagina')
         })
@@ -31,7 +27,7 @@ exports.listaTarefas = async (req, res) => {
 exports.renderizaTarefas = async (req, res) => {
 
     const tarefa = new Tarefa();
-    await tarefa.enviaTarefas()
+    await tarefa.enviaTarefas(req.session.user)
     const tarefas = tarefa.tarefas
 
     res.render('listaTarefas', { tarefas })
@@ -42,6 +38,4 @@ exports.apagaTarefa = async (req, res) => {
     await tarefa.excluirTarefa(req.body);
 
     res.json('Deletado com sucesso')
-
-
 }

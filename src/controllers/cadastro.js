@@ -100,3 +100,9 @@ exports.logar = async (req, res) => {
         console.log(e)
     }
 }
+exports.logout = async (req, res) => {
+    req.session.destroy();
+    
+    res.redirect('/login')
+
+}

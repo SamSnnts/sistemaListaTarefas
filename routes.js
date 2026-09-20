@@ -2,7 +2,7 @@ const express = require('express');
 const route = express.Router();
 
 const { index } = require('./src/controllers/paginaInicial')
-const{ cadastrar, logar } = require('./src/controllers/cadastro')
+const{ cadastrar, logar, logout } = require('./src/controllers/cadastro')
 const{ listaTarefas, renderizaTarefas, apagaTarefa } = require('./src/controllers/listaDeTarefas')
 const { verificaLogin } = require('./src/middlewares/middlewares')
 
@@ -18,5 +18,6 @@ route.get('/cadastro', (req, res) => {
 route.post('/lista-de-tarefas', listaTarefas)
 route.get('/lista-de-tarefas', verificaLogin, renderizaTarefas)
 route.delete('/lista-de-tarefas', apagaTarefa)
+route.get('/logout', logout)
 
 module.exports = route

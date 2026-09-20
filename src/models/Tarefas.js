@@ -4,17 +4,18 @@ const mongoose = require('mongoose');
 const TarefaSchema = mongoose.Schema({
     tarefa: {type: String, required: true},
     status: {type: Boolean, default: false},
-    
+    idUsuario: {type: String, required: true}
 });
 
 const TarefaModel = mongoose.model('Tarefas', TarefaSchema);
 
 class Tarefa {
-    constructor(body){
+    constructor(body, user){
         this.body = body;
         this.errors = []
         this.tarefa = null
-        this.tarefas = null
+        this.tarefas = null;
+        this.user = user
         
     }
 
@@ -25,7 +26,8 @@ class Tarefa {
         if(this.errors.length > 0) return
         
         this.tarefa = await TarefaModel.create({
-            tarefa: this.body.tarefa
+            tarefa: this.body.tarefa,
+            idUsuario: this.user
         })
 
 
@@ -41,8 +43,10 @@ class Tarefa {
         
     }
 
-    async enviaTarefas(){
-        this.tarefas = await TarefaModel.find({})
+    async enviaTarefas(idUsuario){
+        
+        this.tarefas = await TarefaModel.find({idUsuario})
+        
 
     }
 
