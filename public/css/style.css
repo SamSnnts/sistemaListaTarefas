@@ -39,7 +39,8 @@ h1{
 
     background-color: rgb(228, 228, 208);
     margin: auto;
-    width: 500px;
+    max-width: 500px;
+    min-width: 350px;
     height: 500px;
     border-radius: 10px;
 
@@ -62,7 +63,8 @@ form{
     
 }
 input{
-    width: 300px;
+    max-width: 300px;
+    min-width: 200px;
     height: 30px;
     background-color: transparent;
     border: 1px solid rgb(112, 101, 101);
