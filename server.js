@@ -3,9 +3,6 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose'); 
 mongoose.connect(process.env.MONGO_URI)
-.then(() => {
-    app.emit('conectadoDB')
-})
 .catch((e) => {
     console.log(e)
 })
@@ -17,7 +14,7 @@ const  {MongoStore} = require('connect-mongo');
 const {flash, recuperaInputEmail} = require('./src/middlewares/middlewares')
 
 const app = express();
-const port = 3000;
+
 
 app.use(express.static(path.resolve(__dirname, 'public')));
 app.set('views', path.resolve(__dirname, 'src', 'views'));
@@ -73,6 +70,5 @@ app.use((err, req, res, next) => {
     next(err)
 }) 
 
-app.on('conectadoDB', () =>{ 
-    module.exports = app
-})
+
+module.exports = app
