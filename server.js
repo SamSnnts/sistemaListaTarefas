@@ -74,7 +74,5 @@ app.use((err, req, res, next) => {
 }) 
 
 app.on('conectadoDB', () =>{ 
-    app.listen( port, () =>{ 
-        console.log( 'http://localhost:3000' )
-    })
+    module.exports = app
 })
