@@ -26,7 +26,7 @@ app.set('view engine', 'ejs');
 app.use(express.json())
 app.use(express.urlencoded({extended : true}));
 app.use(session({
-    secret: 'uma-chave-secreta',
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({mongoUrl: process.env.MONGO_URI}),
