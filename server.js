@@ -16,8 +16,9 @@ const {flash, recuperaInputEmail} = require('./src/middlewares/middlewares')
 const app = express();
 
 
-app.use(express.static(path.resolve(__dirname, 'public')));
-app.set('views', path.resolve(__dirname, 'src', 'views'));
+app.use(express.static(path.resolve(process.cwd(), 'public')));
+
+app.set('views', path.resolve(process.cwd(), 'src', 'views'));
 app.set('view engine', 'ejs');
 
 app.use(express.json())
